@@ -1,10 +1,13 @@
+require "./data_reader.rb"
+
 class Search
-  def find_properties
-    read_data
-    store_data_into_arrays
-    
+  def get_csv_data
+    data_reader = DataReader.new
+    hotel_name = data_reader.read_data_from("hotels.csv")
+    puts hotel_name
   end
+
 end
 
 search = Search.new
-search.find_properties
+search.get_csv_data
