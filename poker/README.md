@@ -1,2 +1,4 @@
-This folder contains METIS refactoring practice. Included
-are things like poker game, hotel search and rock/paper/scissors.
+## Poker Game
+
+This is a game of Five Card Stud, which can deal decks to players and 
+determine what poker-combination they have.
