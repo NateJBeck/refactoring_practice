@@ -1,4 +1,7 @@
+require "csv"
+
 require "./data_reader.rb"
+require "./hotel.rb"
 
 class Search
   def get_csv_data
@@ -7,12 +10,20 @@ class Search
   end
 
   def search
-    print "Enter hotel name > "
-    search = gets.chomp
-    puts @hotel_information[search][:city]
-    puts @hotel_information[search][:phone]
-    puts @hotel_information[search][:singles]
-    puts @hotel_information[search][:doubles]
+    desired_hotel_name = ask_user_for_desired_hotel
+    print_hotel_information(desired_hotel_name)
+  end
+
+  private
+
+  def ask_user_for_desired_hotel
+    print "Enter Hotel Name >> "
+    gets.chomp
+  end
+
+  def print_hotel_information(desired_hotel_name)
+    hotel = @hotel_information.fetch(desired_hotel_name, NullHotel.new)
+    hotel.print_information
   end
 end
 
