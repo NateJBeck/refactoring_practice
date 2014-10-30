@@ -3,7 +3,7 @@ require "csv"
 require "./data_reader.rb"
 require "./hotel.rb"
 require "./null_hotel.rb"
-require "./parser.rb"
+require "./listing.rb"
 
 class Search
   def get_csv_data

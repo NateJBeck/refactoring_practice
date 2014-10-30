@@ -9,7 +9,7 @@ class Hotel
   end
 
   def print_information
-    parser = Parser.new(@info)
+    parser = Listing.new(@info)
     parser.print_hotel_data
   end
 end
