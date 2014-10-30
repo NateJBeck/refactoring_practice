@@ -2,7 +2,6 @@ require "./player.rb"
 require "./computer.rb"
 require "./judge.rb"
 
-
 class Game
   CHOICES = ["r", "p", "s"]
   COMBOS = {"R" => "P", "P" => "S", "S" => "R"}
@@ -15,35 +14,35 @@ class Game
   end
 
   def play
+    cheat_or_not
     while another_round?
-      cheat_or_not
       display_round_number
       make_moves
-      display_moves
       puts judge_result
-      show_results
+      print_player_win_percentage
     end
   end
 
   private
 
-  def cheat_or_not
-    puts "1) Computer always wins 2) Computer Never Wins"
-    input = gets.chomp
-    if input == "1"
-      computer_wins
-    elsif input == "2"
-      computer_loses
-    else
-      choose_one
-    end
+  def show_moves
+    puts "Player went with #{@player_move}"
+    puts "Computer went with #{@computer_move}"
   end
 
-  def show_results
-    if judge_result == "Player wins!"
-      @player_wins += 1
-    end
+  def cheat_or_not
+    puts "Want the computer to cheat or not?"
+    puts "1) NO"
+    puts "2) Computer ALWAYS wins"
+    puts "3) Computer NEVER wins"
+    puts "4) RANDOM MODE"
+    puts "==>> "
+    @input = gets.chomp
+  end
+
+  def print_player_win_percentage
     puts
+    @player_wins = @judge.player_wins
     puts "You've won #{(@player_wins*100)/@round}% of games thus far"
   end
 
@@ -52,26 +51,32 @@ class Game
   end
 
   def make_moves
+    if random_mode?
+      @input = rand(1..3)
+    end
+
     @player_move = @player.make_a_move
-    @computer_move = @computer.cheat_but_lose(@player_move)
+    computer_make_a_move
+    show_moves
   end
 
-  def display_moves
-    show_player_move
-    show_computer_move
+  def computer_make_a_move
+    if @input == "1"
+      @computer_move = @computer.make_a_move
+    elsif @input == "2"
+      @computer_move = @computer.cheat_and_win(@player_move)
+    elsif @input == "3"
+      @computer_move = @computer.cheat_but_lose(@player_move)
+    end
   end
 
-  def show_player_move
-    puts "Player went with #{@player_move}"
-  end
-
-  def show_computer_move
-    puts "Computer went with #{@computer_move}"
+  def random_mode?
+    @input == "4"
   end
 
   def judge_result
-    judge = Judge.new(@player_move, @computer_move)
-    judge.announce_winner
+    @judge = Judge.new(@player_move, @computer_move)
+    @judge.announce_winner
   end
 
   def another_round?

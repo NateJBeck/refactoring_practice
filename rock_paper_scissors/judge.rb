@@ -3,6 +3,7 @@ class Judge
       @player = player
       @computer = computer
       @combos = Game::COMBOS
+      @player_wins = 0
   end
 
   def announce_winner
@@ -13,6 +14,10 @@ class Judge
     end
   end
 
+  def player_wins
+    @player_wins
+  end
+
   private
 
   def is_tie?
@@ -21,6 +26,7 @@ class Judge
 
   def find_winner
     if @combos[@computer] == @player
+      @player_wins += 1
       "Player wins!"
     else
       "Computer Wins!"

@@ -3,7 +3,7 @@ class Computer
     Game::CHOICES.sample.upcase
   end
 
-  def cheat(player_move)
+  def cheat_and_win(player_move)
     Game::COMBOS[player_move]
   end
 
