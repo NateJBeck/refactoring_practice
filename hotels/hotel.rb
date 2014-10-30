@@ -15,12 +15,3 @@ class Hotel
     puts "Doubles: #{@info[:doubles]}"
   end
 end
-
-class NullHotel
-  def initialize
-  end
-
-  def print_information
-    puts "----- No Such Hotel -----"
-  end
-end
