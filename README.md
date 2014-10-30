@@ -1,4 +1,4 @@
-refactoring_practice
+##Refactoring Practice
 ====================
 
 A metis project to learn the basics of refactoring
