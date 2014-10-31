@@ -1,3 +1,3 @@
 ##Refactoring Practice
 
-A metis project to learn the basics of refactoring
+Created in METIS: a project to learn the basics of refactoring.
